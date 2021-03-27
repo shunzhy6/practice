@@ -21,33 +21,49 @@ import base.ListNode;
 */
 public class NC50 {
 
+    int level = 0;
+
     /**
      * @param head ListNode类
      * @param k int整型
      * @return ListNode类
      */
     public ListNode reverseKGroup (ListNode head, int k) {
+        // 循环找到下一个反转的头节点
         ListNode next = head;
         int i = 0;
         while (i != k && next != null) {
             i++;
             next = next.next;
         }
+        // i == k 代表还存在满足反转分组大小的链表
         if (i == k) {
-            ListNode node = new ListNode();
-            node.next = this.reverseKGroup(head, next);
-            next.next = this.reverseKGroup(next, k);
-            return node.next;
+            // 递归反转
+            ListNode node = this.reverseKGroup(next, k);
+
+            // 执行反转
+            level = 0;
+            ListNode reverseNode = this.reverseKGroup1(head, k);
+
+            // 将反转后的链表的最后一个节点的next指向递归返回后的链表
+            ListNode lastNode = reverseNode;
+            while (lastNode.next != null) {
+                lastNode = lastNode.next;
+            }
+            lastNode.next = node;
+
+            return reverseNode;
         } else {
-            return next;
+            return head;
         }
     }
 
-    public ListNode reverseKGroup (ListNode head, ListNode last) {
-        if (head == null || head.next == null || head == last) {
+    public ListNode reverseKGroup1 (ListNode head, int k) {
+        level++;
+        if (head == null || head.next == null || level == k) {
             return head;
         }
-        ListNode node = this.reverseKGroup(head.next, last);
+        ListNode node = this.reverseKGroup1(head.next, k);
         head.next.next = head;
         head.next = null;
         return node;

@@ -15,7 +15,43 @@ public class NC88 {
 
     public int findKth(int[] a, int n, int K) {
         // write code here
-        return n;
+        return this.quickSort(a, 0, n - 1, K);
+    }
+
+    private int quickSort(int[] a, int left, int right, int K) {
+        if (left >= right) {
+            return a[left];
+        }
+        int position = this.position(a, left, right);
+        if (position + 1 == K) {
+            return a[position];
+        }
+        if (position + 1 > K) {
+            return this.quickSort(a, left, position - 1, K);
+        } else {
+            return this.quickSort(a, position + 1, right, K);
+        }
+    }
+
+    private int position(int[] a, int left, int right) {
+        int tmp = a[left];
+        while (left < right) {
+            while (left < right && a[right] >= tmp) {
+                right--;
+            }
+            if (left < right) {
+                a[left++] = a[right];
+            }
+            while (left < right && a[left] < tmp) {
+                left++;
+            }
+            if (left < right) {
+                a[right--] = a[left];
+            }
+        }
+        a[left] = tmp;
+
+        return left;
     }
 
 }
