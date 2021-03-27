@@ -1,4 +1,4 @@
-package niuke;
+package newcode88;
 
 /**
  *有一个整数数组，请你根据快速排序的思路，找出数组中第K大的数。
@@ -15,6 +15,7 @@ public class NC88 {
 
     public int findKth(int[] a, int n, int K) {
         // write code here
+        return n;
     }
 
 }

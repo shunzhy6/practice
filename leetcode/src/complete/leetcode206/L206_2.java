@@ -16,7 +16,6 @@ import base.ListNode;
  */
 public class L206_2 {
 
-
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
         ListNode curr = head;
@@ -28,9 +27,5 @@ public class L206_2 {
         }
         return prev;
     }
-
-
-
-
 
 }

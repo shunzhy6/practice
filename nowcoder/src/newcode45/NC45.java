@@ -1,4 +1,6 @@
-package niuke;
+package newcode45;
+
+import base.TreeNode;
 
 /**
  *  分别按照二叉树先序，中序和后序打印所有的节点。
@@ -12,20 +14,14 @@ package niuke;
 */
 public class NC45 {
 
-    /*
-     * public class TreeNode {
-     *   int val = 0;
-     *   TreeNode left = null;
-     *   TreeNode right = null;
-     * }
-     */
     /**
-     *
+     * @TODO
      * @param root TreeNode类 the root of binary tree
      * @return int整型二维数组
      */
     public int[][] threeOrders (TreeNode root) {
         // write code here
+        return null;
     }
 
 }

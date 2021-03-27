@@ -10,7 +10,6 @@ import base.ListNode;
  输入: 1->2->3->4->5->NULL
  输出: 5->4->3->2->1->NULL
 
-
  * @author zhengyingshun
  * @date 2021/3/24 15:45
  */
@@ -34,25 +33,5 @@ public class L206_1 {
 
         return result;
     }
-
-    public ListNode reverseList1(ListNode head) {
-        ListNode result = null;
-        ListNode current = head;
-
-        while (current != null) {
-            ListNode node = current.next;
-
-            current.next = result;
-            result = current;
-
-            current = node;
-        }
-
-        return result;
-    }
-
-
-
-
 
 }
