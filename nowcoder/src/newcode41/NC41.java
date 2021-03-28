@@ -33,19 +33,24 @@ public class NC41 {
     public int maxLength (int[] arr) {
         int max = 0;
         Map<Integer, Integer> map = new HashMap<>(arr.length);
-        int sum = 0;
-        int preRe = 0;
+        int sum = 0; //目前的无重复子串长度
+        int startIndex = 0; //当前无重复子串的开头位置
         for (int i = 0; i < arr.length; i++) {
             if (map.containsKey(arr[i])) {
-                int preIndex = map.get(arr[i]);
+                int preSameIndex = map.get(arr[i]); //最近的一个相同字符串的位置
 
-                if (preIndex < preRe) {
-                    sum = i - preRe;
-                    preRe = preIndex + 1;
+                // 此处为预防preSameIndex有可能为当前无重复子串的前面，
+                // 如4,1,2,3,1,2,3,4,5，当遍历到第二个4时，此时startIndex=5，当前无重复子串为1234，preSameIndex=1，此时不存在重复
+                if (preSameIndex >= startIndex) {
+                    startIndex = preSameIndex + 1;
+                    sum = i - preSameIndex;
+                } else {
+                    sum++;
+                    max = Math.max(max, sum);
                 }
             } else {
                 sum++;
-                max = max > sum ? max : sum;
+                max = Math.max(max, sum);
             }
             map.put(arr[i], i);
         }

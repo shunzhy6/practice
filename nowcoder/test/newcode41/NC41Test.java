@@ -33,4 +33,16 @@ public class NC41Test {
         Assert.assertEquals(max, 6);
     }
 
+    @Test
+    public void maxLength5() throws Exception {
+        int max = nc41.maxLength(new int[]{6,4,1,2,3,1,2,3,4,5});
+        Assert.assertEquals(max, 5);
+    }
+
+    @Test
+    public void maxLength6() throws Exception {
+        int max = nc41.maxLength(new int[]{1,4,1,2,3,1,2,3,4,5});
+        Assert.assertEquals(max, 5);
+    }
+
 }
