@@ -29,7 +29,7 @@ public class ListNode {
 
     public ListNode(String vals) {
         this();
-        vals = vals.trim();
+        vals = vals.replace(" ", "");
         String[] str = vals.split(",");
         this.val = Integer.parseInt(str[0]);
 
@@ -53,10 +53,6 @@ public class ListNode {
     }
 
     public String getString() {
-        if (this == null) {
-            return null;
-        }
-
         StringBuilder sb = new StringBuilder();
 
         ListNode listNode = this;

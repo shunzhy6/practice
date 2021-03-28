@@ -1,4 +1,4 @@
-package leetcode19;
+package complete.leetcode19;
 
 import base.ListNode;
 
@@ -29,25 +29,26 @@ import base.ListNode;
 public class RemoveNthFromEnd {
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode nNode = head;
+        // 使用快慢指针实现
+        ListNode fastNode = head;
         for (int i = 0; i < n; i++) {
-            nNode = nNode.next;
+            fastNode = fastNode.next;
         }
 
-        if (nNode == null) {
-            return null;
+        if (fastNode == null) {
+            return head.next;
         }
 
-        ListNode preNode = head;
-        while (nNode.next != null) {
-            preNode = preNode.next;
-            nNode = nNode.next;
+        ListNode slowNode = head;
+        while (fastNode.next != null) {
+            slowNode = slowNode.next;
+            fastNode = fastNode.next;
         }
 
-        if (preNode.next != null) {
-            preNode.next = preNode.next.next;
+        if (slowNode.next != null) {
+            slowNode.next = slowNode.next.next;
         } else {
-            preNode.next = null;
+            slowNode.next = null;
         }
 
         return head;

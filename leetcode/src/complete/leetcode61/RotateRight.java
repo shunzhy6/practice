@@ -1,4 +1,4 @@
-package leetcode61;
+package complete.leetcode61;
 
 import base.ListNode;
 
@@ -25,41 +25,41 @@ import base.ListNode;
  */
 public class RotateRight {
 
+    /**
+     * 快慢指针
+     * @author zhengyingshun
+     * @date 2021/3/28 23:19
+     */
     public ListNode rotateRight(ListNode head, int k) {
-        int i = 0;
+        if (head == null || head.next == null || k == 0) {
+            return head;
+        }
+        int i = 1;
 
         ListNode fast = head;
         ListNode slow = head;
-        while (fast != null) {
-            if (i >= k + 1) {
-                slow = slow.next;
-            }
+        ListNode sslow = head;
+        while (fast.next != null) {
             i++;
             fast = fast.next;
+            if (i > k) {
+                slow = slow.next;
+            }
+            if (i > k + 1) {
+                sslow = sslow.next;
+            }
         }
 
-        if (i >= k) {
-            return this.rotateRight(head, slow);
-        }
-
-        return this.rotateRight(head, k % i);
-    }
-
-    public ListNode rotateRight(ListNode head, ListNode node) {
-        if (node == head) {
+        if (i == k) {
             return head;
+        } if (i > k) {
+            fast.next = head;
+            sslow.next = null;
+            return slow;
+        } else {
+            return this.rotateRight(head, k % i);
         }
 
-        ListNode result = node.next;
-        node.next = null;
-
-        ListNode next = result;
-        while (next.next != null) {
-            next = next.next;
-        }
-        next.next = head;
-
-        return result;
     }
 
 }

@@ -1,9 +1,7 @@
-package leetcode1669;
+package complete.leetcode1669;
 
 import base.ListNode;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class MergeInBetweenTest {
 

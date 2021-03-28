@@ -1,9 +1,7 @@
-package leetcode19;
+package complete.leetcode19;
 
 import base.ListNode;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class RemoveNthFromEndTest {
 
@@ -28,6 +26,13 @@ public class RemoveNthFromEndTest {
     public void removeNthFromEnd3() throws Exception {
         ListNode listNode = removeNthFromEnd.removeNthFromEnd(new ListNode("1,2"), 1);
         // [1]
+        listNode.print();
+    }
+
+    @Test
+    public void removeNthFromEnd4() throws Exception {
+        ListNode listNode = removeNthFromEnd.removeNthFromEnd(new ListNode("1,2"), 2);
+        // [2]
         listNode.print();
     }
 
