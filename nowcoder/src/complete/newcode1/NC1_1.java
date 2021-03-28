@@ -1,4 +1,4 @@
-package newcode1;
+package complete.newcode1;
 
 /**
  * 以字符串的形式读入两个数字，编写一个函数计算它们的和，以字符串形式返回。
@@ -13,7 +13,7 @@ package newcode1;
  * @author zhengyingshun
  * @date 2021/3/28 19:50
  */
-public class NC1 {
+public class NC1_1 {
 
     /**
      * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
@@ -23,8 +23,22 @@ public class NC1 {
      * @return string字符串
      */
     public String solve (String s, String t) {
-        // write code here
-        return s;
+        StringBuilder sb = new StringBuilder();
+        int i = s.length() - 1;
+        int j = t.length() - 1;
+        int carry = 0;
+        while (i >= 0 || j >= 0) {
+            int x = i < 0 ? 0 : s.charAt(i--) - '0';
+            int y = j < 0 ? 0 : t.charAt(j--) - '0';
+            int sum = x + y + carry;
+            sb.append(sum % 10);
+            carry = sum / 10;
+        }
+        if (carry > 0) {
+            sb.append(carry);
+        }
+
+        return sb.reverse().toString();
     }
 
 }
