@@ -35,15 +35,22 @@ import java.util.*;
  * −2×10^9≤x,y≤2×10^9
  *
 */
-public class NC93_LRU {
+public class LRUCache {
 
-    private Map<Integer, Value> lruDb = new HashMap<>(16);
+    private Map<Integer, Node> lruDb;
+    private Node head;
+    private Node tail;
+    private int capacity;
 
-    /**
-     * set方法未满足O(1)
-     * @author zhengyingshun
-     * @date 2021/3/29 22:12
-     */
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        lruDb = new HashMap<>(capacity);
+        head = new Node();
+        tail = new Node();
+        head.next = tail;
+        tail.pre = head;
+    }
+
     public int[] LRU (int[][] operators, int k) {
         List<Integer> list = new ArrayList<>();
 
@@ -64,44 +71,71 @@ public class NC93_LRU {
     }
 
     private void add(int[] operate, int k) {
-        while (lruDb.size() >= k) {
-            this.resize();
+        Node node = lruDb.get(operate[1]);
+        if (node == null) {
+            while (lruDb.size() >= k) {
+                Node removeNode = this.removeTail();
+                lruDb.remove(removeNode.key);
+            }
+            node = new Node(operate[1], operate[2]);
+            this.addHead(node);
+            lruDb.put(operate[1], node);
+        } else {
+            node.val = operate[2];
+            moveToHead(node);
         }
-        lruDb.put(operate[1], new Value(operate[2], new Date()));
     }
 
-    private int get(int key) {
-        Value value = lruDb.get(key);
+    public int get(int key) {
+        Node value = lruDb.get(key);
         if (value == null) {
             return -1;
         }
-        value.lastUse = new Date();
-        System.currentTimeMillis();
+        this.moveToHead(value);
         return value.val;
     }
 
-    private void resize() {
-        Value lruVal = null;
-        for (Map.Entry<Integer, Value> entry : lruDb.entrySet()) {
-            Value currVal = entry.getValue();
-            if (lruVal == null) {
-                lruVal = currVal;
-            } else {
-                if (lruVal.lastUse.after(currVal.lastUse)) {
-                    lruVal = currVal;
-                }
-            }
-        }
-        lruDb.remove(lruVal.val);
+    private void moveToHead(Node node) {
+        this.remove(node);
+        this.addHead(node);
     }
 
-    static class Value {
-        int val;
-        Date lastUse;
+    private void remove(Node node) {
+        node.pre.next = node.next;
+        node.next.pre = node.pre;
+    }
 
-        public Value(int val, Date lastUse) {
+    private void addHead(Node node) {
+        node.next = head.next;
+        node.pre = head;
+        head.next.pre = node;
+        head.next = node;
+    }
+
+    private Node removeTail() {
+        Node removeNode = this.tail.pre;
+        this.remove(removeNode);
+        return removeNode;
+    }
+
+    static class Node {
+        int key;
+        int val;
+        Node pre;
+        Node next;
+
+        public Node() {
+        }
+
+        public Node(int key, int val) {
+            this.key = key;
             this.val = val;
-            this.lastUse = lastUse;
+        }
+
+        public Node(int val, Node pre, Node next) {
+            this.val = val;
+            this.pre = pre;
+            this.next = next;
         }
     }
 
