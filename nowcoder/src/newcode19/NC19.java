@@ -22,13 +22,26 @@ package newcode19;
 public class NC19 {
 
     /**
+     * TODO 动态规划与分治法
      * max sum of the subarray
      * @param arr int整型一维数组 the array
      * @return int整型
      */
     public int maxsumofSubarray (int[] arr) {
-        // write code here
-        return 0;
+        int max = 0;
+
+        int sum = 0;
+        for (int i : arr) {
+            int t = sum + i;
+            if (t >= 0) {
+                max = Math.max(max, t);
+                sum = t;
+            } else {
+                sum = 0;
+            }
+        }
+
+        return max;
     }
 
 }

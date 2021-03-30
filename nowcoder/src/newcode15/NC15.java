@@ -31,14 +31,31 @@ import java.util.ArrayList;
  */
 public class NC15 {
 
+    private ArrayList<ArrayList<Integer>> lists = new ArrayList<>();
+
     /**
      *
      * @param root TreeNode类
      * @return int整型ArrayList<ArrayList<>>
      */
     public ArrayList<ArrayList<Integer>> levelOrder (TreeNode root) {
-        // write code here
-        return null;
+        this.addLevel(root, 0);
+        return lists;
+    }
+
+    private void addLevel(TreeNode root, int level) {
+        if (root == null) {
+            return;
+        }
+        if (lists.size() <= level) {
+            lists.add(new ArrayList<>());
+        }
+
+        lists.get(level).add(root.val);
+
+        level++;
+        this.addLevel(root.left, level);
+        this.addLevel(root.right, level);
     }
 
 }

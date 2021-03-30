@@ -1,9 +1,7 @@
-package newcode41;
+package complete.newcode41;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class NC41Test {
 

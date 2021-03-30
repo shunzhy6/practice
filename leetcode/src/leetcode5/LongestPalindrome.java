@@ -30,6 +30,16 @@ package leetcode5;
 public class LongestPalindrome {
 
     public String longestPalindrome(String s) {
+        int i = 0;
+        while (i < s.length() / 2) {
+            if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {
+                String left = this.longestPalindrome(s.substring(0, s.length() - 1));
+                String right = this.longestPalindrome(s.substring(1, s.length() - 1));
+                return left.length() > right.length() ? left : right;
+            }
+            i++;
+        }
+
         return s;
     }
 

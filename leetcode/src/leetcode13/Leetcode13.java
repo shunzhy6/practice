@@ -1,10 +1,11 @@
 package leetcode13;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * 三数之和
- * 给你一个包含 n 个整数的数组nums，判断nums中是否存在三个元素 a，b，c ，使得a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+ * 给你一个包含 n 个整数的数组nums，判断nums中是否存在三个元素 a，b，c ，使得a + b + c = 0 ？
+ * 请你找出所有和为 0 且不重复的三元组。
  * 注意：答案中不可以包含重复的三元组。
  *
  * 示例 1：
@@ -27,8 +28,45 @@ import java.util.List;
  */
 public class Leetcode13 {
 
+    private List<List<Integer>> lists = new ArrayList<>();
+    private Set<String> set = new HashSet<>();
+
     public List<List<Integer>> threeSum(int[] nums) {
-        return null;
+        if (nums == null || nums.length < 3) {
+            return null;
+        }
+
+        Arrays.sort(nums);
+
+        this.threeSum(nums, 0, nums.length - 1);
+
+        for (String s : set) {
+            List<Integer> list = new ArrayList<>();
+            String[] ints = s.split(",");
+            list.add(Integer.parseInt(ints[0]));
+            list.add(Integer.parseInt(ints[1]));
+            list.add(Integer.parseInt(ints[2]));
+            lists.add(list);
+        }
+
+        return lists;
+    }
+
+    public void threeSum(int[] nums, int left, int right) {
+        if (right - left < 3) {
+            return;
+        }
+
+        if (nums[left] + nums[left + 1] + nums[right] == 0) {
+            set.add(nums[left] + "," + nums[left + 1] + "," + nums[right]);
+        }
+
+        if (nums[left] + nums[right - 1] + nums[right] == 0) {
+            set.add(nums[left] + "," + nums[right - 1] + "," + nums[right]);
+        }
+
+        this.threeSum(nums, left + 1, right);
+        this.threeSum(nums, left, right - 1);
     }
 
 }

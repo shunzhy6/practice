@@ -1,5 +1,6 @@
 package leetcode22;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +23,24 @@ import java.util.List;
 public class L22 {
 
     public List<String> generateParenthesis(int n) {
-        return null;
+        if (n == 1) {
+            List<String> result = new ArrayList<>();
+            result.add("()");
+            return result;
+        }
+
+        List<String> list = this.generateParenthesis( n - 1);
+        List<String> result = new ArrayList<>();
+
+        result.add(list.get(0) + "()");
+        result.add("(" + list.get(0) + ")");
+        for (int i = 1; i < list.size(); i++) {
+            result.add(list.get(i) + "()");
+            result.add("()" + list.get(i));
+            result.add("(" + list.get(i) + ")");
+        }
+
+        return result;
     }
 
 }
