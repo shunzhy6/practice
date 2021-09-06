@@ -1,4 +1,4 @@
-package complete.Leetcode2;
+package complete.leetcode2;
 
 import base.ListNode;
 

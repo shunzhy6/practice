@@ -1,7 +1,7 @@
 package complete.leetcode2;
 
 import base.ListNode;
-import complete.Leetcode2.AddTwoNumbers;
+
 import org.junit.Test;
 
 public class AddTwoNumbersTest {
