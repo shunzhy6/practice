@@ -1,4 +1,4 @@
-package leetcode15;
+package complete.leetcode15;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ import java.util.stream.Stream;
  * @author zhengyingshun <zhengyingshun@kuaishou.com>
  * Created on 2021-09-06
  */
-public class L15_1 {
+public class L15_2 {
 
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -44,6 +44,9 @@ public class L15_1 {
             if (nums[i] > 0) {
                 break;
             }
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
             int pre = nums[i] - 1;
             for (int j = i + 1; j < nums.length; j++) {
                 int z = -nums[i] - nums[j];
@@ -53,20 +56,14 @@ public class L15_1 {
                 if (map.containsKey(z)) {
                     if (nums[i] == nums[j] && nums[j] == z) {
                         if (map.get(z) > 2) {
-                            if (!result.contains(Stream.of(nums[i], nums[j], z).collect(Collectors.toList()))) {
-                                result.add(Stream.of(nums[i], nums[j], z).collect(Collectors.toList()));
-                            }
+                            result.add(Stream.of(nums[i], nums[j], z).collect(Collectors.toList()));
                         }
                     } else if (nums[j] == z || nums[i] == z) {
                         if (map.get(z) > 1) {
-                            if (!result.contains(Stream.of(nums[i], nums[j], z).collect(Collectors.toList()))) {
-                                result.add(Stream.of(nums[i], nums[j], z).collect(Collectors.toList()));
-                            }
-                        }
-                    } else {
-                        if (!result.contains(Stream.of(nums[i], nums[j], z).collect(Collectors.toList()))) {
                             result.add(Stream.of(nums[i], nums[j], z).collect(Collectors.toList()));
                         }
+                    } else {
+                        result.add(Stream.of(nums[i], nums[j], z).collect(Collectors.toList()));
                     }
                 }
                 pre = nums[j];
