@@ -1,7 +1,9 @@
-package leetcode22;
+package complete.leetcode22;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 括号生成
@@ -18,7 +20,7 @@ import java.util.List;
  * 提示：
  * 1 <= n <= 8
  * @author zhengyingshun
- * @date 2021/3/29 21:57
+ * @date 2021/9/9 21:57
  */
 public class L22 {
 
@@ -30,17 +32,14 @@ public class L22 {
         }
 
         List<String> list = this.generateParenthesis( n - 1);
-        List<String> result = new ArrayList<>();
 
-        result.add(list.get(0) + "()");
-        result.add("(" + list.get(0) + ")");
-        for (int i = 1; i < list.size(); i++) {
-            result.add(list.get(i) + "()");
-            result.add("()" + list.get(i));
-            result.add("(" + list.get(i) + ")");
+        Set<String> set = new HashSet<>();
+        for (String s : list) {
+            for (int i = 0; i < s.length(); i++) {
+                set.add(s.substring(0, i) + "()" + s.substring(i));
+            }
         }
-
-        return result;
+        return new ArrayList<>(set);
     }
 
 }
