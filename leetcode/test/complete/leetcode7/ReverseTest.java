@@ -1,8 +1,6 @@
-package leetcode7;
+package complete.leetcode7;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ReverseTest {
 
