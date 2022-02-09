@@ -1,4 +1,4 @@
-package leetcode33;
+package complete.leetcode33;
 
 import org.junit.Assert;
 import org.junit.Test;

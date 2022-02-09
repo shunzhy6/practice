@@ -1,4 +1,4 @@
-package leetcode33;
+package complete.leetcode33;
 
 /**
  * 33. 搜索旋转排序数组
@@ -28,33 +28,28 @@ package leetcode33;
  * @author zhengyingshun <zhengyingshun@kuaishou.com>
  * Created on 2021-09-16
  */
-public class L33_2 {
+public class L33 {
 
     public int search(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
         while (left <= right) {
             int mid = (left + right) / 2;
-            if (target == nums[left]) {
-                return left;
-            } else if (target == nums[right]) {
-                return right;
-            } else if (left == mid || right == mid) {
-                return -1;
+            if (target == nums[mid]) {
+                return mid;
             }
 
-            // 一定为左递增或右递增，不存在其他情况
-            if (nums[left] < nums[mid]) {
-                if (target > nums[left] && target < nums[mid]) {
-                    right = mid;
+            if (nums[left] <= nums[mid]) {
+                if (target >= nums[left] && target < nums[mid]) {
+                    right = mid - 1;
                 } else {
-                    left = mid;
+                    left = mid + 1;
                 }
             } else {
-                if (target > nums[mid] && target < nums[right]) {
-                    left = mid;
+                if (target > nums[mid] && target <= nums[right]) {
+                    left = mid + 1;
                 } else {
-                    right = mid;
+                    right = mid - 1;
                 }
             }
         }

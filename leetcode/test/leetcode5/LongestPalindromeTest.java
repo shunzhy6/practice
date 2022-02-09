@@ -33,4 +33,10 @@ public class LongestPalindromeTest {
         Assert.assertEquals("a", rome);
     }
 
+    @Test
+    public void longestPalindrome5() throws Exception {
+        String rome = longestPalindrome.longestPalindrome("abb");
+        Assert.assertEquals("bb", rome);
+    }
+
 }
