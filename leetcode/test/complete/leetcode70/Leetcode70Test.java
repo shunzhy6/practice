@@ -1,9 +1,7 @@
-package leetcode70;
+package complete.leetcode70;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class Leetcode70Test {
 

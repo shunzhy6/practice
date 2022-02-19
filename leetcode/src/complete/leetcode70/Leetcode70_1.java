@@ -1,4 +1,4 @@
-package leetcode70;
+package complete.leetcode70;
 
 /**
  * 假设你正在爬楼梯。需要 n阶你才能到达楼顶。
@@ -22,17 +22,19 @@ package leetcode70;
  * @author zhengyingshun
  * @date 2021/3/29 21:50
  */
-public class Leetcode70 {
+public class Leetcode70_1 {
 
     public int climbStairs(int n) {
-        if (n == 1) {
-            return 1;
-        }
-        if (n == 2) {
-            return 2;
+        int f1 = 1;
+        int f2 = 2;
+        int result = 0;
+        for (int i = 3; i <= n; i++) {
+            result = f1 + f2;
+            f1 = f2;
+            f2 = result;
         }
 
-        return climbStairs(n - 1) + climbStairs(n - 2);
+        return result;
     }
 
 }

@@ -28,45 +28,56 @@ import java.util.*;
  */
 public class Leetcode13 {
 
-    private List<List<Integer>> lists = new ArrayList<>();
-    private Set<String> set = new HashSet<>();
-
     public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
         if (nums == null || nums.length < 3) {
-            return null;
+            return result;
         }
 
         Arrays.sort(nums);
 
-        this.threeSum(nums, 0, nums.length - 1);
-
-        for (String s : set) {
-            List<Integer> list = new ArrayList<>();
-            String[] ints = s.split(",");
-            list.add(Integer.parseInt(ints[0]));
-            list.add(Integer.parseInt(ints[1]));
-            list.add(Integer.parseInt(ints[2]));
-            lists.add(list);
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                break;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            List<List<Integer>> twoList = twoSum(nums, i + 1, -nums[i]);
+            if (!twoList.isEmpty()) {
+                int first = nums[i];
+                twoList.forEach(list -> list.add(0, first));
+                result.addAll(twoList);
+            }
         }
 
-        return lists;
+        return result;
     }
 
-    public void threeSum(int[] nums, int left, int right) {
-        if (right - left < 3) {
-            return;
+    public List<List<Integer>> twoSum(int[] nums, int start, int target) {
+        List<List<Integer>> twoList = new ArrayList<>();
+
+        for (int i = start; i < nums.length; i++) {
+            int j = start + 1;
+            for (; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[j]);
+                    twoList.add(list);
+                    break;
+                } else if (nums[i] + nums[j] > target) {
+                    break;
+                }
+            }
+            if (i == j - 1) {
+                break;
+            }
         }
 
-        if (nums[left] + nums[left + 1] + nums[right] == 0) {
-            set.add(nums[left] + "," + nums[left + 1] + "," + nums[right]);
-        }
-
-        if (nums[left] + nums[right - 1] + nums[right] == 0) {
-            set.add(nums[left] + "," + nums[right - 1] + "," + nums[right]);
-        }
-
-        this.threeSum(nums, left + 1, right);
-        this.threeSum(nums, left, right - 1);
+        return twoList;
     }
+
+
 
 }
