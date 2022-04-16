@@ -24,7 +24,7 @@ package complete.leetcode50;
  * @author zhengyingshun <zhengyingshun@kuaishou.com>
  * Created on 2022-02-16
  */
-public class Leetcode50 {
+public class Leetcode50_e1 {
 
     public double myPow(double x, int n) {
         boolean flag = n < 0;

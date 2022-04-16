@@ -23,6 +23,40 @@ import base.ListNode;
 public class IsPalindrome {
 
     public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        ListNode fast = head.next.next;
+        ListNode slow = head.next;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        ListNode pre = null;
+        ListNode curr = head;
+        while (curr != slow) {
+            ListNode next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+
+        //如果是奇数个节点，去掉后半部分的第一个节点。
+        if (fast != null) {
+            slow = slow.next;
+        }
+
+        while (pre != null) {
+            if (pre.val != slow.val) {
+                return false;
+            }
+            pre = pre.next;
+            slow = slow.next;
+        }
+
         return true;
     }
 
