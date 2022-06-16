@@ -25,6 +25,9 @@ package leetcode55;
 public class Leetcode55 {
 
     public boolean canJump(int[] nums) {
+
+
+
         return true;
     }
 

@@ -35,6 +35,7 @@ import java.util.List;
  */
 public class Leetcode39_2 {
 
+    // 不需要排序
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> ans = new ArrayList<>();
         List<Integer> combine = new ArrayList<>();

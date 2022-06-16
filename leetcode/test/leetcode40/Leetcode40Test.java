@@ -44,4 +44,11 @@ public class Leetcode40Test {
                 "[[0],[0,0],[0,0,0]]");
     }
 
+    @Test
+    public void combinationSum25() {
+        List<List<Integer>> result = leetcode40.combinationSum2(new int[] {1,2}, 3);
+        Assert.assertEquals(Arrays.toString(result.toArray()).replace(" ", ""),
+                "[[1,2]]");
+    }
+
 }
